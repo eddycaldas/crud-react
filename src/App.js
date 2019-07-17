@@ -3,6 +3,7 @@ import './App.css';
 
 class App extends Component {
   state = {
+    newTodo: '',
     todos: [
   {
   id: 1,
@@ -21,10 +22,23 @@ class App extends Component {
     name: 'Go to work'
   }]
   }
+
+  handleChange = (event) => {
+    this.setState({
+      newTodo: event.target.value
+    })
+    console.log(event.target.value)
+  }
+
 render() {
   return (
     <div className="container">
-      <h2 className='text-center p-4'>To Do's App</h2>
+      <input type='text'
+            name='todo'
+            className='my-4 form-control'
+            placeholder='Add new todo'
+            value={this.state.newTodo}
+            onChange={this.handleChange}/>
       <ul className='list-group'>
           {this.state.todos.map((item) => {
             return <li className='list-group-item' key={item.id}>{item.name}</li>
