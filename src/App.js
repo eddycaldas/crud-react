@@ -27,7 +27,19 @@ class App extends Component {
     this.setState({
       newTodo: event.target.value
     })
-    console.log(event.target.value)
+  }
+
+  addTodo = () => {
+    const newTodo = {
+      name: this.state.newTodo,
+      id: this.state.todos[this.state.todos.length-1].id + 1
+    }
+    const todos = this.state.todos
+    todos.push(newTodo)
+    this.setState({
+      todos: todos,
+      newTodo: ''
+    })
   }
 
 render() {
@@ -39,6 +51,10 @@ render() {
             placeholder='Add new todo'
             value={this.state.newTodo}
             onChange={this.handleChange}/>
+
+      <button className='btn-info form-control mb-4'
+              onClick={this.addTodo}>Add Todo</button>
+
       <ul className='list-group'>
           {this.state.todos.map((item) => {
             return <li className='list-group-item' key={item.id}>{item.name}</li>
