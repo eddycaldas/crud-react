@@ -4,6 +4,7 @@ import './App.css';
 class App extends Component {
   state = {
     newTodo: '',
+    editing: false,
     todos: [
   {
   id: 1,
@@ -42,13 +43,26 @@ class App extends Component {
     })
   }
 
-  deleteTodo = (index) => {
-    // console.log(index)
+  deleteTodo = (id) => {
+    // console.log(id)
     const todos = this.state.todos
-    delete todos[index]
+    delete todos[id]
     this.setState({
       todos: todos
     })
+  }
+
+  editTodo = (index) => {
+    const theTodo = this.state.todos[index]
+    this.setState({
+      editing: true,
+      newTodo: theTodo.name
+      
+    })
+  }
+
+  updateTodo = () => {
+
   }
 
 render() {
@@ -62,18 +76,31 @@ render() {
             onChange={this.handleChange}/>
 
       <button className='btn-info form-control mb-4'
-              onClick={this.addTodo}>Add Todo</button>
+              onClick={this.state.editing ? this.updateTodo : this.addTodo}>
+                {this.state.editing ? 'Update Todo' : 'Add Todo'}
+      </button>
+
+      {
+        !this.state.editing ?
+      
 
       <ul className='list-group'>
           {this.state.todos.map((item, index) => {
-            return <li className='list-group-item' key={item.id}>{item.name}
-                   <button className='btn-danger btn-small ml-4 btn'
+            return <li className='list-group-item' key={item.id}>
+                      <button className='btn-info btn-small mr-4 btn'
+                          onClick={() => { this.editTodo(index) }}
+                      >Update</button> 
+                      {item.name}
+                      <button className='btn-danger btn-small ml-4 btn'
                             onClick={() => { this.deleteTodo(index) }}
-                            >X</button> 
+                      >Delete</button> 
                   </li>
           })}
         
-      </ul>
+      </ul> : null
+
+        }
+
     </div>
   )
 }
