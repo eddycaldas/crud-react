@@ -42,6 +42,15 @@ class App extends Component {
     })
   }
 
+  deleteTodo = (index) => {
+    // console.log(index)
+    const todos = this.state.todos
+    delete todos[index]
+    this.setState({
+      todos: todos
+    })
+  }
+
 render() {
   return (
     <div className="container">
@@ -56,8 +65,12 @@ render() {
               onClick={this.addTodo}>Add Todo</button>
 
       <ul className='list-group'>
-          {this.state.todos.map((item) => {
-            return <li className='list-group-item' key={item.id}>{item.name}</li>
+          {this.state.todos.map((item, index) => {
+            return <li className='list-group-item' key={item.id}>{item.name}
+                   <button className='btn-danger btn-small ml-4 btn'
+                            onClick={() => { this.deleteTodo(index) }}
+                            >X</button> 
+                  </li>
           })}
         
       </ul>
