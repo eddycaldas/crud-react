@@ -31,10 +31,19 @@ class App extends Component {
     })
   }
 
+  updatingId = () => {
+    const myId = this.state.todos[this.state.todos.length - 1]
+    if (myId) {
+      return myId.id + 1
+    } else {
+      return 1
+    }
+  }
+
   addTodo = () => {
     const newTodo = {
       name: this.state.newTodo,
-      id: this.state.todos[this.state.todos.length-1].id + 1
+      id: this.updatingId()
     }
     const todos = this.state.todos
     todos.push(newTodo)
