@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
+import ListItem from './ListItem'
 
 class App extends Component {
   state = {
@@ -107,15 +108,14 @@ render() {
 
       <ul className='list-group'>
           {this.state.todos.map((item, index) => {
-            return <li className='list-group-item' key={item.id}>
-                      <button className='btn-info btn-small mr-4 btn'
-                          onClick={() => { this.editTodo(index) }}
-                      >Update</button> 
-                      {item.name}
-                      <button className='btn-danger btn-small ml-4 btn'
-                            onClick={() => { this.deleteTodo(index) }}
-                      >Delete</button> 
-                  </li>
+              return (
+                <ListItem 
+                key={item.id}
+                item={item}
+                editTodo={() => {this.editTodo(index)}}
+                deleteTodo={() => {this.deleteTodo(index)}}/>
+              )
+                
           })}
         
       </ul> : null
