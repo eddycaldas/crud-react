@@ -5,6 +5,7 @@ class App extends Component {
   state = {
     newTodo: '',
     editing: false,
+    editingIndex: null, //this is used for update function
     todos: [
   {
   id: 1,
@@ -56,13 +57,24 @@ class App extends Component {
     const theTodo = this.state.todos[index]
     this.setState({
       editing: true,
-      newTodo: theTodo.name
+      newTodo: theTodo.name,
+      editingIndex: index //used on the update function
       
     })
   }
 
   updateTodo = () => {
+    const todo = this.state.todos[this.state.editingIndex]
+    todo.name = this.state.newTodo
 
+    const todos = this.state.todos
+    todos[this.state.editingIndex] = todo
+    this.setState({
+      todos: todos,
+      editing: false,
+      editingIndex: null,
+      newTodo: ''
+    })
   }
 
 render() {
