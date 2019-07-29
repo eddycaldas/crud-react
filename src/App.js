@@ -2,29 +2,15 @@ import React, {Component} from 'react';
 import './App.css';
 import ListItem from './ListItem'
 
+const apiUrl = "https://5d3f4ee6a42af000148690eb.mockapi.io"
 class App extends Component {
+
   state = {
     newTodo: '',
     notification: null,
     editing: false,
     editingIndex: null, //this is used for update function
-    todos: [
-  {
-  id: 1,
-  name: 'Make Breakfast'
-  },
-  {
-    id: 2,
-    name: 'Walk Max'
-  },
-  {
-    id: 3,
-    name: 'Do some schooling'
-  },
-  {
-    id: 4, 
-    name: 'Go to work'
-  }]
+    todos: []
   }
 
   handleChange = (event) => {
