@@ -118,9 +118,11 @@ render() {
             value={this.state.newTodo}
             onChange={this.handleChange}/>
 
-      <button className='btn-info form-control mb-4'
-              onClick={this.state.editing ? this.updateTodo : this.addTodo}>
-                {this.state.editing ? 'Update Todo' : 'Add Todo'}
+      <button className='btn-success form-control mb-4'
+              onClick={this.state.editing ? this.updateTodo : this.addTodo}
+              disabled={this.state.newTodo.length < 3}>
+              {this.state.editing ? 'Update Todo' : 'Add Todo'}
+              
       </button>
 
       {
