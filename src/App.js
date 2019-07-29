@@ -5,6 +5,7 @@ import ListItem from './ListItem'
 class App extends Component {
   state = {
     newTodo: '',
+    notification: null,
     editing: false,
     editingIndex: null, //this is used for update function
     todos: [
@@ -52,6 +53,7 @@ class App extends Component {
       todos: todos,
       newTodo: ''
     })
+    this.alert("todo addeed successfully.")
   }
 
   deleteTodo = (id) => {
@@ -61,6 +63,7 @@ class App extends Component {
     this.setState({
       todos: todos
     })
+    this.alert("todo deleted successfully.")
   }
 
   editTodo = (index) => {
@@ -85,11 +88,29 @@ class App extends Component {
       editingIndex: null,
       newTodo: ''
     })
+    this.alert("todo updated successfully.")
+  }
+
+  alert = (notification) => {
+    this.setState({
+      notification
+    })
+    setTimeout(() => {
+      this.setState({
+        notification: null
+      })
+    }, 2000)
   }
 
 render() {
   return (
     <div className="container">
+      {
+        this.state.notification &&
+          <div className='alert mt-3 alert-success'>
+            <p className='text-center'>{this.state.notification}</p>
+          </div>
+      }
       <input type='text'
             name='todo'
             className='my-4 form-control'
